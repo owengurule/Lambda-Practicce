@@ -15,31 +15,27 @@ namespace LambdaPractice
 
 
             //declare a variable kayakProducts and set it equal to all products that contain the word "Kayak"
-            string kayakProducts = "Kayak";
+           List <string> kayakProducts = products.Where(x => x.Contains("Kayak")).ToList();
             //print the kayakProducts to the console using a foreach loop.
-            foreach (string Kayak in products)
+            foreach (var item in kayakProducts)
             {
-                Console.WriteLine(Kayak);
+                Console.WriteLine(item);
             }
             Console.WriteLine();
             //declare a variable shoeProducts and set it equal to all products that contain the word "Shoes"
-            string shoeProducts = "Shoes";
+            List<string> shoeProducts = products.Where(x => x.Contains("Shoes")).ToList();
             //print the shoeProducts to the console using a foreach loop or string.Join().
             foreach (string Shoes in products)
             {
                 Console.WriteLine(Shoes);
             }
-            Console.WriteLine();
+            Console.WriteLine(string.Join(", ", shoeProducts));
             //declare a variable ballProducts and set it equal to all the products that have ball in the name.
-            string ballProducts = "ball";
+            List<string> ballProducts = products.Where(x => x.ToLower().Contains("ball")).ToList();
             //print the ballProducts to the console using a foreach loop or string.Join().
-            foreach (string ball in products)
-            {
-                Console.WriteLine(ball);
-            }
-            Console.WriteLine();
+            Console.WriteLine(string.Join(", ", ballProducts));
             //sort ballProducts alphabetically and print them to the console.
-            List<string> sorted = products.OrderBy(x => x).ToList();
+            Console.WriteLine(string.Join(", ", ballProducts.OrderBy(x => x)));
             //add six more items to the products list using .add().
             products.Add("Bike Bars");
                         products.Add("Bike Frame");
@@ -50,23 +46,29 @@ namespace LambdaPractice
 
 
             //print the product with the longest name to the console using the .First() extension.
-                        List<string> longest = products.OrderBy(x => x.Length).ToList();
-                        Console.WriteLine(products.Skip(0).Take(1).Last());
+                        Console.WriteLine(products.OrderByDescending(x => x.Length).First());
             //print the product with the shortest name to the console using OrderByDesceding() and the .First() extension.
-                        List<string> shortest = products.OrderByDescending(x => x.Length).ToList();
-                        Console.WriteLine(products.Skip(0).Take(1).First());
+                        Console.WriteLine(products.OrderByDescending(x => x.Length).Last());
             //print the product with the 4th shortest name to the console using an index or Skip/Take (you must convert the results to a list using .ToList()).
-                        List<string> fourthShortest = products.OrderBy(x => x.Length).ToList();
-                        Console.WriteLine(products.Skip(3).Take(1).First());
+                        Console.WriteLine(products.OrderBy(x => x.Length).ToList()[3]);
+            //skip and take way to do it
+                        Console.WriteLine(products.OrderBy(x => x.Length).Skip(3).Take(1).First());
             //print the ballProduct with the 2nd longest name to the console using an index or Skip/Take (you must convert the results to a list using .ToList()).
-                        List<string> secondLongest = products.OrderBy(x => x.Length).ToList();
-                        Console.WriteLine(products.Skip(1).Take(1).Last());
+                        Console.WriteLine(ballProducts.OrderByDescending(x => x.Length).Skip(1).First());
             //declare a variable reversedProducts and set it equal to all products ordered by the longest word first. (use the OrderByDescending() extension).
-
+                        List<string> reversedProducts = products.OrderByDescending(x => x.Length).ToList();
             //print out the reversedProducts to the console using a foreach loop.
-
+                        foreach (string var in reversedProducts)
+                        {
+                            Console.WriteLine(var);
+                        }
             //print out all the products ordered by the longest word first using the OrderByDecending() extension and a foreach loop.  
             //Note: you will not use a variable to store your list
+                        foreach (var item in products.OrderByDescending(x => x.Length))
+                        {
+                            Console.WriteLine(item);
+                        }
+
 
             Console.ReadKey();
         }
